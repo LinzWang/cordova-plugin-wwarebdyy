@@ -1,0 +1,12 @@
+{
+  "name": "wwareBaiduYY",
+  "version": "1.0.1",
+  "description": "",
+  "cordova":{
+"id":"cordova-plugin-wwareBaiduYY",
+"platforms":["android"]
+},
+
+  "author": "",
+  "license": "MIT"
+}

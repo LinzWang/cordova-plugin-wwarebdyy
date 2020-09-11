@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-wwarebdyy" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>wwareBaiduYY</name>
+  <js-module name="wwareBaiduYY" src="www/wwareBaiduYY.js">
+    <clobbers target="cordova.plugins.wwareBaiduYY"/>
+  </js-module>
+  <platform name="android">
+
+    <source-file src="src/android/org/wware/bdyy/wwareBaiduYY.java" target-dir="src/org/wware/bdyy"/>
+    <!--仅添加 BaiduTraceSDK_v3_1_5 bos及okhttp、okio未添加-->
+    <source-file src="src/android/libs/BaiduTraceSDK_v3_1_5.jar" target-dir="libs"/>
+    <!--声明so文件的位置-->
+    <resource-file src="src/android/libs/arm64-v8a/libBaiduTraceSDK_v3_1_5.so" target="libs/arm64-v8a/libBaiduTraceSDK_v3_1_5.so" />
+    <resource-file src="src/android/libs/armeabi-v7a/libBaiduTraceSDK_v3_1_5.so" target="libs/armeabi-v7a/libBaiduTraceSDK_v3_1_5.so" />
+    <resource-file src="src/android/libs/armeabi/libBaiduTraceSDK_v3_1_5.so" target="libs/armeabi/libBaiduTraceSDK_v3_1_5.so" />
+    <resource-file src="src/android/libs/x86/libBaiduTraceSDK_v3_1_5.so" target="libs/x86/libBaiduTraceSDK_v3_1_5.so" />
+    <resource-file src="src/android/libs/x86_64/libBaiduTraceSDK_v3_1_5.so" target="libs/x86_64/libBaiduTraceSDK_v3_1_5.so" />
+    <!--声明函数-->
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="wwareBaiduYY">
+        <param name="android-package" value="org.wware.bdyy.wwareBaiduYY"/>
+      </feature>
+    </config-file>
+    <!--为鹰眼服务添加AK-->
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <service
+         android:name="com.baidu.trace.LBSTraceService"
+         android:enabled="true"
+         android:process=":remote" >
+      </service>
+      <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="$AK"/>
+  </config-file>
+</platform>
+<platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="wwareBaiduYY">
+        <param name="ios-package" value="wwareBaiduYY"/>
+      </feature>
+      <preference name="AK" value="$AK"/>
+      <preference name="MCODE" value="$MCODE"/>
+      <preference name="SERVICEID" value="$SERVICEID"/>
+    </config-file>
+    <header-file src="src/ios/wwareBaiduYY.h"/>
+    <source-file src="src/ios/wwareBaiduYY.m"/>
+    <framework src="src/ios/libs/BaiduTraceSDK.framework" custom="true" embed="true"/>
+  </platform>
+  <preference name="AK" default="AK"/>
+  <preference name="MCODE" default="MCODE"/>
+  <preference name="SERVICEID" default="SERVICEID"/>
+</plugin>
